@@ -51,10 +51,9 @@ module.exports = {
       
       user.password = undefined;
       
-      
-      
-      return response.json({ user, token })
+      response.header("Authorization", token);
     }
     
-  } 
+    return response.json({user});
+  }
 }

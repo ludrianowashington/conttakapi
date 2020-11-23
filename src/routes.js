@@ -3,29 +3,31 @@ const express = require('express');
 const UserController = require('./controller/User');
 const AuthController = require('./controller/authController');
 
+const {loggedIn} = require('./middleware/auth')
+
 const routes = express.Router();
 
-routes.get('/user', UserController.list);
+routes.get('/user', loggedIn, UserController.list);
 routes.post('/register', AuthController.register);
 
-routes.post('/login',  AuthController.login);
+routes.post('/login', AuthController.login);
 
-routes.get('/overview', (req, res) => {
-  res.send("Seja bem vindo");
+routes.get('/overview', loggedIn, (req, res) => {
+  res.json({msg: "Seja bem vindo"});
 });
 
 
-routes.get('/transaction', (req, res) => {
-  res.send("Seja bem vindo");
+routes.get('/transaction', loggedIn, (req, res) => {
+  res.json({msg: "Seja bem vindo"});
 });
 
 
-routes.get('/notifications', (req, res) => {
-  res.send("Seja bem vindo");
+routes.get('/notifications', loggedIn, (req, res) => {
+  res.json({msg: "Seja bem vindo"});
 });
 
-routes.get('/profile', (req, res) => {
-  res.send("Seja bem vindo");
+routes.get('/profile', loggedIn, (req, res) => {
+  res.json({msg: "Seja bem vindo"});
 });
 
 
