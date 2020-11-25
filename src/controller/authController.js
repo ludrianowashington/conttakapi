@@ -45,15 +45,15 @@ module.exports = {
       if (!validPass)
         return response.status(400).json('Email or Password is wrong!')
 
-      const token = jwt.sign({id: user.id}, authConfig.secret, {
+      const token = jwt.sign({id: user.id, user: user.username}, authConfig.secret, {
         expiresIn: 300
       });
       
       user.password = undefined;
       
-      response.header("Authorization", token);
+      response.header("Authorization", token).json({ user, token});
+      
     }
     
-    return response.json({user});
   }
 }

@@ -10,10 +10,10 @@ const routes = express.Router();
 routes.get('/user', loggedIn, UserController.list);
 routes.post('/register', AuthController.register);
 
-routes.post('/login', AuthController.login);
+routes.post('/', AuthController.login);
 
 routes.get('/overview', loggedIn, (req, res) => {
-  res.json({msg: "Seja bem vindo"});
+  res.json({msg: "Seja bem vindo", id: req.user.id, user: req.user.user });
 });
 
 

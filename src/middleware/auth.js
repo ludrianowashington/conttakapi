@@ -12,9 +12,9 @@ module.exports = {
             token = token.slice(7, token.length).trimLeft();
         }
         const verified = jwt.verify(token, authConfig.secret); 
-        console.log(verified.id)
         
         request.user = verified;
+        
         next();
     }
     catch (err) {
