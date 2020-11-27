@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   async loggedIn(request, response, next) {
     let token = request.header('Authorization');
-    if (!token) return response.status(401).send("Access Denied");
+    if (!token)
+      return response.status(401).json({ msg: "Access Denied" });
 
     try {
         if (token.startsWith('Bearer ')) {
@@ -16,9 +17,8 @@ module.exports = {
         request.user = verified;
         
         next();
-    }
-    catch (err) {
-        response.status(400).send("Invalid Token");
+    } catch {
+      response.status(400).json({msg: "Invalid Token"});
     }
   }
 }
