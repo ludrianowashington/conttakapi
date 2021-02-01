@@ -2,9 +2,10 @@ const connection = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
-    const user = await connection('user').select("*");
-
-    return response.json(user);
+    const userTransactions = await connection('transactions')
+      .select("*");
+    
+    return response.json(userTransactions);
   },
 
   async show(request, response) {
@@ -35,7 +36,7 @@ module.exports = {
     const user = await connection('user')
       .where('id', id)
       .update({
-
+        
       })
     
   }

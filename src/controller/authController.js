@@ -6,7 +6,7 @@ const authConfig = require('../config/auth');
 module.exports = {
   async register(request, response) {
     const { email, name, lastname, username, pass, confirm } = request.body;
-
+    
     const password = await bcrypt.hash(pass, 10);
     
     const isSame = await bcrypt.compare(confirm, password);

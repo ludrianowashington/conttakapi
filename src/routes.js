@@ -1,9 +1,10 @@
 const express = require('express');
 
-const UserController = require('./controller/User');
+const UserController = require('./controller/userController');
 const AuthController = require('./controller/authController');
+const TransactionController = require('./controller/transactionController');
 
-const {loggedIn} = require('./middleware/auth')
+const {loggedIn} = require('./middleware/auth');
 
 const routes = express.Router();
 
@@ -19,9 +20,7 @@ routes.get('/overview', loggedIn, (req, res) => {
 });
 
 
-routes.get('/transaction', loggedIn, (req, res) => {
-  res.json({msg: "Seja bem vindo"});
-});
+routes.get('/transaction', loggedIn, TransactionController.index);
 
 
 routes.get('/notifications', loggedIn, (req, res) => {
