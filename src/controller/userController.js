@@ -7,12 +7,6 @@ module.exports = {
     return response.json(user);
   },
 
-  async create(request, response){
-    const userId = request.user.id;
-    const {name, value, category, count, date, description, type} = request.body;
-    
-  },
-  
   async show(request, response) {
     const userId = request.user.id;
 

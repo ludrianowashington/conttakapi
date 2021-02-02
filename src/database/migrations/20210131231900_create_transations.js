@@ -9,6 +9,13 @@ exports.up = function(knex) {
         table.date('date');
         table.text('description');
         table.boolean('type');
+
+        table.integer('user_id').notNullable();
+
+        table
+            .foreign("user_id")
+            .references('id')
+            .inTable('user');
       });
 };
 

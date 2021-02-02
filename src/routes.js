@@ -21,6 +21,7 @@ routes.get('/overview', loggedIn, (req, res) => {
 
 
 routes.get('/transaction', loggedIn, TransactionController.index);
+routes.post('/transaction', loggedIn, TransactionController.create);
 
 
 routes.get('/notifications', loggedIn, (req, res) => {
