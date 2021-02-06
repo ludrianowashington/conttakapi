@@ -46,7 +46,7 @@ module.exports = {
         return response.status(400).json('Email or Password is wrong!')
 
       const token = jwt.sign({id: user.id, user: user.username}, authConfig.secret, {
-        expiresIn: 300
+        expiresIn: 14400
       });
       
       user.password = undefined;
