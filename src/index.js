@@ -8,9 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(routes);
 
-app.listen(3333, () => {
-  console.log("Servidor rodando!")
-})
+app.listen(process.env.PORT || 3333);

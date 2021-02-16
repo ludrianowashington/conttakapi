@@ -1,5 +1,8 @@
 // Update with your config settings.
 
+import path from 'path'
+import 'dotenv/config'
+
 module.exports = {
 
   development: {
@@ -17,7 +20,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -30,19 +33,18 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+
+    client: "pg",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
+      host: process.env.PG_HOST,
+      user: process.env.PG_USER,
+      password: process.env.PG_PASSWORD,
+      database: process.env.PG_DATABASE,
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: path.resolve(__dirname, 'src', 'database', 'migrations')
+    },
+    useNullAsDefault: true
   }
 
 };

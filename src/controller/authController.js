@@ -1,14 +1,15 @@
 const connection = require('../database/connection')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth');
+
+import 'dotenv/config';
 
 module.exports = {
   async register(request, response) {
     const { email, name, lastname, username, pass, confirm } = request.body;
-    
+
     const password = await bcrypt.hash(pass, 10);
-    
+
     const isSame = await bcrypt.compare(confirm, password);
 
     if (!password || !confirm) {
@@ -16,7 +17,7 @@ module.exports = {
     } else if (isSame === false) {
       response.json({ msg: 'Password is not match! Try again... ' });
     } else {
-      
+
 
       await connection('user').insert({
         email,
@@ -25,10 +26,10 @@ module.exports = {
         username,
         password
       });
-      
+
     }
-    
-    return response.json({ msg: 'Register is gone with success!'})
+
+    return response.json({ msg: 'Register is gone with success!' })
   },
 
   async login(request, response) {
@@ -37,23 +38,23 @@ module.exports = {
     const user = await connection('user')
       .where('email', email)
       .select('*')
-      .first();    
-    
+      .first();
+
     if (user) {
       const validPass = await bcrypt.compare(pass, user.password);
 
       if (!validPass)
         return response.status(400).json('Email or Password is wrong!')
 
-      const token = jwt.sign({id: user.id, user: user.username}, authConfig.secret, {
+      const token = jwt.sign({ id: user.id, user: user.username }, process.env.SECRET_KEY, {
         expiresIn: 14400
       });
-      
+
       user.password = undefined;
-      
+
       response.header("Authorization", token).json({ user, token });
-      
+
     }
-    
+
   }
 }
