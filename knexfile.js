@@ -1,4 +1,3 @@
-// Update with your config settings.
 
 import path from 'path'
 import 'dotenv/config'
