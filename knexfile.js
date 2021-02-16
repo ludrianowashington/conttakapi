@@ -1,6 +1,4 @@
 
-import 'dotenv/config'
-
 module.exports = {
 
   development: {
