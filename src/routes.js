@@ -5,7 +5,7 @@ const AuthController = require('./controller/authController');
 const TransactionController = require('./controller/transactionController');
 const OverviewController = require('./controller/overviewController');
 
-const {loggedIn} = require('./middleware/auth');
+const { loggedIn } = require('./middleware/auth');
 
 const routes = express.Router();
 
@@ -24,8 +24,8 @@ routes.get('/transaction/:id', loggedIn, TransactionController.show);
 routes.post('/transaction', loggedIn, TransactionController.create);
 routes.delete('/transaction/:id', loggedIn, TransactionController.delete);
 
-routes.get('/message', loggedIn, (req, res) => {
-  res.json({msg: "Seja bem vindo"});
+routes.get('/', loggedIn, (req, res) => {
+  res.json({ msg: "Seja bem vindo" });
 });
 
 // routes.get('/list', loggedIn, UserController.index);
