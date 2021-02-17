@@ -2,7 +2,6 @@ const connection = require('../database/connection')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-import 'dotenv/config';
 
 module.exports = {
   async register(request, response) {
