@@ -1,6 +1,5 @@
 // Update with your config settings.
 
-import path from 'path'
 
 module.exports = {
 
