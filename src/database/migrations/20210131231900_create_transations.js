@@ -15,7 +15,7 @@ exports.up = function (knex) {
         table
             .foreign("user_id")
             .references('id')
-            .inTable('user');
+            .inTable('users');
     });
 };
 
