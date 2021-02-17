@@ -30,7 +30,7 @@ module.exports = {
 
   production: {
 
-    client: "mysql",
+    client: "pg",
     connection: {
       host: process.env.PG_HOST,
       user: process.env.PG_USER,
