@@ -1,4 +1,5 @@
-const authConfig = require('../config/auth');
+import 'dotenv/config'
+
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -8,17 +9,17 @@ module.exports = {
       return response.status(401).json({ msg: "Access Denied" });
 
     try {
-        if (token.startsWith('Bearer ')) {
-            // Remove Bearer from string
-            token = token.slice(7, token.length).trimLeft();
-        }
-        const verified = jwt.verify(token, authConfig.secret); 
-        
-        request.user = verified;
-        
-        next();
+      if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length).trimLeft();
+      }
+      const verified = jwt.verify(token, process.env.SECRET_KEY);
+
+      request.user = verified;
+
+      next();
     } catch {
-      response.status(400).json({msg: "Invalid Token"});
+      response.status(400).json({ msg: "Invalid Token" });
     }
   }
 }
