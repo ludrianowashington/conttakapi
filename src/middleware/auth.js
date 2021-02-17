@@ -8,7 +8,6 @@ module.exports = {
 
     try {
       if (token.startsWith('Bearer ')) {
-        // Remove Bearer from string
         token = token.slice(7, token.length).trimLeft();
       }
       const verified = jwt.verify(token, process.env.SECRET_KEY);

@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node src/index.js",
     "knex:migrate": "knex --knexfile knexfile.js migrate:latest",
-    "knex:rollback": "knex --knexfile knexfile.js migrate:rollback"
+    "knex:up": "knex --knexfile knexfile.js migrate:up",
+    "knex:down": "knex --knexfile knexfile.js migrate:down",
+    "knex:rollback": "knex --knexfile knexfile.js migrate:rollback",
+    "knex:rollback:all": "knex --knexfile knexfile.js migrate:rollback --all"
   },
   "repository": "git@bitbucket.org:ludriano/micash-backend.git",
   "author": "Ludriano Washington <ludriano.washi@gmail.com>",
