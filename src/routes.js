@@ -13,7 +13,7 @@ routes.post('/', AuthController.login);
 routes.post('/register', AuthController.register);
 
 routes.get('/profile/', loggedIn, UserController.show);
-routes.post('/profile/:id', loggedIn, UserController.update);
+// routes.post('/profile/:id', loggedIn, UserController.update);
 
 
 routes.get('/overview', loggedIn, OverviewController.index);

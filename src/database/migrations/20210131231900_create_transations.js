@@ -1,6 +1,6 @@
 
-exports.up = function(knex) {
-    return knex.schema.createTable('transaction', function (table) {
+exports.up = function (knex) {
+    return knex.schema.createTable('transactions', function (table) {
         table.increments('id');
         table.string('name').notNullable();
         table.decimal('value').notNullable();
@@ -16,9 +16,9 @@ exports.up = function(knex) {
             .foreign("user_id")
             .references('id')
             .inTable('user');
-      });
+    });
 };
 
-exports.down = function(knex) {
-    return knex.schema.dropTable('transaction');  
+exports.down = function (knex) {
+    return knex.schema.dropTable('transactions');
 };
