@@ -1,5 +1,4 @@
 
-
 module.exports = {
   client: 'pg',
   connection: {
@@ -9,7 +8,7 @@ module.exports = {
     database: process.env.PG_DATABASE,
   },
   migrations: {
-    directory: path.resolve(__dirname, 'src', 'database', 'migrations')
+    directory: 'src/database/migrations'
   },
   useNullAsDefault: true
 }
