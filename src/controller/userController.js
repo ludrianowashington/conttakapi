@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
-    const user = await connection('user').select("*");
+    const user = await connection('users').select("*");
 
     return response.json(user);
   },
@@ -10,33 +10,33 @@ module.exports = {
   async show(request, response) {
     const userId = request.user.id;
 
-    const user = await connection('user')
+    const user = await connection('users')
       .where('id', userId)
       .select('*')
       .first();
-    
+
     user.password = undefined;
 
-    response.json({user});
+    response.json({ user });
 
-  }, 
-  
+  },
+
   async update(request, response) {
     const { id } = request.params;
     const {
-      email, 
-      name, 
-      lastname, 
+      email,
+      name,
+      lastname,
       username,
-      password, 
+      password,
       confirm
     } = request.body;
 
-    const user = await connection('user')
+    const user = await connection('users')
       .where('id', id)
       .update({
 
       })
-    
+
   }
 }

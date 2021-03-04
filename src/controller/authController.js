@@ -18,7 +18,7 @@ module.exports = {
     } else {
 
 
-      await connection('user').insert({
+      await connection('users').insert({
         email,
         name,
         lastname,
@@ -34,7 +34,7 @@ module.exports = {
   async login(request, response) {
     const { email, pass } = request.body;
 
-    const user = await connection('user')
+    const user = await connection('users')
       .where('email', email)
       .select('*')
       .first();
