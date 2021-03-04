@@ -6,25 +6,25 @@ module.exports = {
         const username = request.user.user;
 
 
-        const transaction = await connection('transaction')
-          .where('user_id', userId)
-          .select('*'); 
+        const transaction = await connection('transactions')
+            .where('user_id', userId)
+            .select('*');
 
-        let expenses = [...transaction].filter((item)=>{
+        let expenses = [...transaction].filter((item) => {
             return item.type === 0;
-        }).reduce((total, exp)=>{
+        }).reduce((total, exp) => {
             return total = parseFloat(total) + parseFloat(exp.value);
         }, 0);
 
-        let incomes = [...transaction].filter((item)=>{
+        let incomes = [...transaction].filter((item) => {
             return item.type === 1;
-        }).reduce((total, exp)=>{
+        }).reduce((total, exp) => {
             return total = parseFloat(total) + parseFloat(exp.value);
         }, 0);
 
         let total = incomes - expenses;
-        
-        return response.json({incomes, expenses, total, transaction});
+
+        return response.json({ incomes, expenses, total, transaction });
 
     }
 }

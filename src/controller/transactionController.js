@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
   async index(request, response) {
-    const userTransactions = await connection('transaction')
+    const userTransactions = await connection('transactions')
       .select("*");
 
     return response.json(userTransactions);
@@ -20,7 +20,7 @@ module.exports = {
       type
     } = request.body;
 
-    await connection('transaction').insert({
+    await connection('transactions').insert({
       name,
       value,
       category,
@@ -38,7 +38,7 @@ module.exports = {
     const { id } = request.params;
     const userId = request.user.id;
 
-    const user = await connection('transaction')
+    const user = await connection('transactions')
       .where('id', id)
       .andWhere('user_id', userId)
       .select('*')
@@ -73,7 +73,7 @@ module.exports = {
   async delete(request, response) {
     const { id } = request.params;
 
-    await connection('transaction')
+    await connection('transactions')
       .where('id', id)
       .del()
 
