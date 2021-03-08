@@ -5,23 +5,30 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   async register(request, response) {
-    const { email, name, lastname, username, pass } = request.body;
+    const { email, name, lastname, username, pass, confirm } = request.body;
 
     const password = await bcrypt.hash(pass, 10);
 
-    // if (!password)
-    //   response.json({ msg: 'Register failed! Try again... ' });
+    const isSame = await bcrypt.compare(confirm, password);
+
+    if (!password || !confirm) {
+      response.json({ msg: 'Register failed! Try again... ' });
+
+    } else if (isSame === false) {
+      response.json({ msg: 'Password is not match! Try again... ' });
+
+    } else {
 
 
-    await connection('users').insert({
-      email,
-      name,
-      lastname,
-      username,
-      password
-    });
+      await connection('users').insert({
+        email,
+        name,
+        lastname,
+        username,
+        password
+      });
 
-
+    }
 
     return response.json({ msg: 'Register is gone with success!' })
   },
