@@ -45,7 +45,7 @@ module.exports = {
       const validPass = await bcrypt.compare(pass, user.password);
 
       if (!validPass)
-        return response.status(400).json('Email or Password is wrong!')
+        return response.status(400).json({msg: 'Email or Password is wrong!'})
 
       const token = jwt.sign({ id: user.id, user: user.username }, process.env.SECRET_KEY, {
         expiresIn: 14400
